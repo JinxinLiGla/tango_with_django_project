@@ -1,4 +1,6 @@
 import os
+import random
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                        'tango_with_django_project.settings')
 
@@ -22,7 +24,7 @@ def populate():
         {"title":"Django Rocks",
          "url":"http://www.djangorocks.com/"},
         {"title":"How to Tango with Django",
-         "url":"http://www.tangowithdjango.com/"}]
+         "url":"http://www.tangowithdjango.com/"} ]
 
     other_pages = [
         {"title":"Bottle",
@@ -44,10 +46,10 @@ def populate():
         for p in Page.objects.filter(category=c):
             print("- {0} - {1}".format(str(c), str(p)))
 
-def add_page(cat, title, url, views=0):
+def add_page(cat, title, url):
     p = Page.objects.get_or_create(category=cat, title=title)[0]
     p.url=url
-    p.views=views
+    p.views=random.randint(1,33)
     p.save()
     return p
 
